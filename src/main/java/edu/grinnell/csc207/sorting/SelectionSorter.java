@@ -3,14 +3,14 @@ package edu.grinnell.csc207.sorting;
 import java.util.Comparator;
 
 /**
- * Something that sorts using selection sort.
+ * A sorter that implements selection sort.
  *
  * @param <T>
- *   The types of values that are sorted.
+ *   The type of elements sorted.
  *
  * @author Samuel A. Rebelsky
+ * @author Slok
  */
-
 public class SelectionSorter<T> implements Sorter<T> {
   // +--------+------------------------------------------------------
   // | Fields |
@@ -19,7 +19,7 @@ public class SelectionSorter<T> implements Sorter<T> {
   /**
    * The way in which elements are ordered.
    */
-  Comparator<? super T> order;
+  private final Comparator<? super T> order;
 
   // +--------------+------------------------------------------------
   // | Constructors |
@@ -29,8 +29,7 @@ public class SelectionSorter<T> implements Sorter<T> {
    * Create a sorter using a particular comparator.
    *
    * @param comparator
-   *   The order in which elements in the array should be ordered
-   *   after sorting.
+   *   The order in which elements in the array should be ordered after sorting.
    */
   public SelectionSorter(Comparator<? super T> comparator) {
     this.order = comparator;
@@ -45,16 +44,19 @@ public class SelectionSorter<T> implements Sorter<T> {
    *
    * @param values
    *   an array to sort.
-   *
-   * @post
-   *   The array has been sorted according to some order (often
-   *   one given to the constructor).
-   * @post
-   *   For all i, 0 &lt; i &lt; values.length,
-   *     order.compare(values[i-1], values[i]) &lt;= 0
    */
   @Override
   public void sort(T[] values) {
-    // STUB
+    for (int i = 0; i < values.length - 1; i++) { // for loop (outer)
+      int minIndex = i;
+      for (int j = i + 1; j < values.length; j++) { // for loop (inner)
+        if (order.compare(values[j], values[minIndex]) < 0) {
+          minIndex = j;
+        } // if
+      } // for loop (inner) ends
+      T temp = values[minIndex];
+      values[minIndex] = values[i];
+      values[i] = temp;
+    } // for loop (outer) ends
   } // sort(T[])
 } // class SelectionSorter
