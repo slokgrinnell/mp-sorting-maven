@@ -219,7 +219,7 @@ public class TestSorter {
     assertSorts(expected, original, intSorter);
   } // arrayWithMixedPositiveNegativeTest
 
-    /**
+      /**
    * Ensure that RajbhandariSlokSort correctly handles an array that is already sorted.
    */
   @Test
